@@ -126,4 +126,7 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>O nome não pode estar vazio</value>
   </data>
+  <data name="TRIP_NOT_FOUND" xml:space="preserve">
+    <value>Viagem nao encontrada</value>
+  </data>
 </root>

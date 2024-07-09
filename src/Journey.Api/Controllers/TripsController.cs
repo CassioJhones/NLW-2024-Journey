@@ -3,7 +3,6 @@ using Journey.Application.UseCases.Trips.GetById;
 using Journey.Application.UseCases.Trips.Register;
 using Journey.Communication.Requests;
 using Journey.Communication.Responses;
-using Journey.Exception.ExceptionsBase;
 using Journey.Infrastructure.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,20 +16,9 @@ public class TripsController : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     public IActionResult Register([FromBody] RequestRegisterTripJson request)
     {
-        try
-        {
-            RegisterTripUseCase useCase = new();
-            ResponseShortTripJson response = useCase.Execute(request);
-            return Created(string.Empty, response);
-        }
-        catch (JourneyException erro)
-        {
-            return BadRequest(erro.Message);
-        }
-        catch
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Erro Desconhecido");
-        }
+        RegisterTripUseCase useCase = new();
+        ResponseShortTripJson response = useCase.Execute(request);
+        return Created(string.Empty, response);
     }
 
     [HttpGet]
@@ -44,11 +32,13 @@ public class TripsController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    [ProducesResponseType(typeof(ResponseTripJson),StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseTripJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
     public IActionResult GetById([FromRoute] Guid id)
     {
-        var useCase = new GetTripByIdUseCase();
-        var reponse = useCase.Execute(id);
+        GetTripByIdUseCase useCase = new();
+        ResponseTripJson reponse = useCase.Execute(id);
         return Ok(reponse);
     }
 }
