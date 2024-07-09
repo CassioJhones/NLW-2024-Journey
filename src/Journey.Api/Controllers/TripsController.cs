@@ -1,7 +1,9 @@
 ﻿using Journey.Application.UseCases.Trips.GetAll;
+using Journey.Application.UseCases.Trips.GetById;
 using Journey.Application.UseCases.Trips.Register;
 using Journey.Communication.Requests;
 using Journey.Exception.ExceptionsBase;
+using Journey.Infrastructure.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Journey.Api.Controllers;
@@ -32,7 +34,16 @@ public class TripsController : ControllerBase
     public IActionResult GetAll()
     {
         GetAllTripsUseCase useCase = new();
-        List<Infrastructure.Entities.Trip> result = useCase.Execute();
+        List<Trip> result = useCase.Execute();
         return Ok(result);
+    }
+
+    [HttpGet]
+    [Route("{id}")]
+    public IActionResult GetById([FromRoute] Guid id)
+    {
+        var useCase = new GetTripByIdUseCase();
+        var reponse = useCase.Execute(id);
+        return Ok(reponse);
     }
 }
