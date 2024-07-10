@@ -7,6 +7,8 @@ public class NotFoundException : JourneyException
     {
     }
 
+    public override IList<string> GetErrorMessages()
+        => [Message];
     public override HttpStatusCode GetStatusCode()
         => HttpStatusCode.NotFound;
 }

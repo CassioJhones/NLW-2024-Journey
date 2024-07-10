@@ -1,6 +1,5 @@
 ﻿using Journey.Communication.Requests;
 using Journey.Communication.Responses;
-using Journey.Exception;
 using Journey.Exception.ExceptionsBase;
 using Journey.Infrastructure;
 using Journey.Infrastructure.Entities;
@@ -8,12 +7,11 @@ using Journey.Infrastructure.Entities;
 namespace Journey.Application.UseCases.Trips.Register;
 public class RegisterTripUseCase
 {
-
     public ResponseShortTripJson Execute(RequestRegisterTripJson request)
     {
         Validate(request);
-        var dbContext = new JourneyDbContext();
-        var entity = new Trip
+        JourneyDbContext dbContext = new();
+        Trip entity = new()
         {
             Name = request.Name,
             StartDate = request.StartDate,
@@ -33,13 +31,13 @@ public class RegisterTripUseCase
 
     private void Validate(RequestRegisterTripJson request)
     {
-        if (string.IsNullOrWhiteSpace(request.Name))
-            throw new ValidationException(ResourceErrorMessages.NAME_EMPTY);
+        RegisterTripValidator validator = new();
+        FluentValidation.Results.ValidationResult result = validator.Validate(request);
 
-        if (request.StartDate.Date < DateTime.UtcNow.Date)
-            throw new ValidationException(ResourceErrorMessages.DATE_TRIP_MUST_BE_LATER_THAN_TODAY);
-
-        if (request.EndDate.Date < request.StartDate.Date)
-            throw new ValidationException(ResourceErrorMessages.END_DATE_TRIP_MUST_BE_LATER_START_DATE);
+        if (!result.IsValid)
+        {
+            List<string> errorMessageList = result.Errors.Select(error => error.ErrorMessage).ToList();
+            throw new ValidationException(errorMessageList);
+        }
     }
 }
