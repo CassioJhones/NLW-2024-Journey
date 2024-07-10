@@ -12,6 +12,13 @@ namespace Journey.Api.Controllers;
 [ApiController]
 public class TripsController : ControllerBase
 {
+    /// <summary>
+    /// Registra uma viagem no banco de dados
+    /// </summary>
+    /// <param name="request">Objeto com os campos necessarios</param>
+    /// <returns>IActionResult</returns>
+    /// <response code="201">Viagem adicionada com Sucesso</response>
+    /// <response code="400">Faltando campos necessarios</response>
     [HttpPost]
     [ProducesResponseType(typeof(ResponseShortTripJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
@@ -22,6 +29,12 @@ public class TripsController : ControllerBase
         return Created(string.Empty, response);
     }
 
+
+    /// <summary>
+    /// Busca todas as viagens salvas no banco de dados
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="200">Sucesso</response>
     [HttpGet]
     [ProducesResponseType(typeof(ResponseTripJson), StatusCodes.Status200OK)]
     public IActionResult GetAll()

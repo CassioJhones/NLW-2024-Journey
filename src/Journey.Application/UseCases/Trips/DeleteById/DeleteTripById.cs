@@ -1,5 +1,4 @@
-﻿using Journey.Communication.Responses;
-using Journey.Exception;
+﻿using Journey.Exception;
 using Journey.Exception.ExceptionsBase;
 using Journey.Infrastructure;
 using Journey.Infrastructure.Entities;
@@ -15,7 +14,7 @@ public class DeleteTripById
 
         if (trips is null)
             throw new NotFoundException(ResourceErrorMessages.TRIP_NOT_FOUND);
-            
+
         dbContext.Trips.Remove(trips);
         dbContext.SaveChanges();
     }
