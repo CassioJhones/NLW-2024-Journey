@@ -61,7 +61,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Atividade não encontrada.
+        ///   Atividade não encontrada.
         /// </summary>
         public static string ACTIVITY_NOT_FOUND {
             get {
@@ -70,7 +70,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Data da atividade está fora do período da viagem.
+        ///   Data da atividade está fora do período da viagem.
         /// </summary>
         public static string DATE_NOT_WITHIN_TRAVEL_PERIOD {
             get {
@@ -79,7 +79,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a A data da viagem deve ser posterior ou igual a data de hoje.
+        ///   A data da viagem deve ser posterior ou igual a data de hoje.
         /// </summary>
         public static string DATE_TRIP_MUST_BE_LATER_THAN_TODAY {
             get {
@@ -88,7 +88,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a A data final deve ser posterior a data de inicio.
+        ///   A data final deve ser posterior a data de inicio.
         /// </summary>
         public static string END_DATE_TRIP_MUST_BE_LATER_START_DATE {
             get {
@@ -97,7 +97,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a O nome não pode estar vazio.
+        ///   O nome não pode estar vazio.
         /// </summary>
         public static string NAME_EMPTY {
             get {
@@ -106,7 +106,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Viagem não encontrada.
+        ///   Viagem não encontrada.
         /// </summary>
         public static string TRIP_NOT_FOUND {
             get {
@@ -115,7 +115,7 @@ namespace Journey.Exception {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro Desconhecido.
+        ///  Erro Desconhecido.
         /// </summary>
         public static string UNKNOWN_ERROR {
             get {
