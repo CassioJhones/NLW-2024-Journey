@@ -1,4 +1,6 @@
-﻿using Journey.Application.UseCases.Activities.Register;
+﻿using Journey.Application.UseCases.Activities.Complete;
+using Journey.Application.UseCases.Activities.Delete;
+using Journey.Application.UseCases.Activities.Register;
 using Journey.Application.UseCases.Trips.DeleteById;
 using Journey.Application.UseCases.Trips.GetAll;
 using Journey.Application.UseCases.Trips.GetById;
@@ -69,9 +71,9 @@ public class TripsController : ControllerBase
 
     //Atividades
     /// <summary>
-    /// Registra uma atividade relacionada a viagem no banco de dados
+    /// Registra uma atividade relacionada a uma viagem no banco de dados
     /// </summary>
-    /// <param name="tripId"></param>
+    /// <param name="tripId">Id da Viagem</param>
     /// <param name="request">Objeto com os campos necessarios</param>
     /// <returns>IActionResult</returns>
     /// <response code="201">Viagem adicionada com Sucesso</response>
@@ -88,5 +90,50 @@ public class TripsController : ControllerBase
         ResponseActivityJson? response = useCase.Execute(tripId, request);
         return Created(string.Empty, response);
     }
+
+
+    /// <summary>
+    /// Completa uma atividade e Atualiza o seu Status
+    /// </summary>
+    /// <param name="tripId">Id da Viagem</param>
+    /// <param name="activId">Id da Atividade</param>
+    /// <returns>IActionResult</returns>
+    /// <response code="204">Sem Conteudo</response>
+    /// <response code="404">Nao Encontrado</response>
+    [HttpPut]
+    [Route("{tripId}/activity/{activId}/complete")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseShortTripJson), StatusCodes.Status404NotFound)]
+    public IActionResult CompleteActivity(
+        [FromRoute] Guid tripId,
+        [FromRoute] Guid activId)
+    {
+        CompleteActivityForTripUseCase useCase = new();
+        useCase.Execute(tripId, activId);
+        return NoContent();
+    }
+
+
+    /// <summary>
+    /// Deleta uma atividade
+    /// </summary>
+    /// <param name="tripId">Id da Viagem</param>
+    /// <param name="activId">Id da Atividade</param>
+    /// <returns>IActionResult</returns>
+    /// <response code="204">Sem Conteudo</response>
+    /// <response code="404">Nao Encontrado</response>
+    [HttpDelete]
+    [Route("{tripId}/activity/{activId}/complete")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseShortTripJson), StatusCodes.Status404NotFound)]
+    public IActionResult DeleteActivity(
+        [FromRoute] Guid tripId,
+        [FromRoute] Guid activId)
+    {
+        DeleteActivityForTripUseCase useCase = new();
+        useCase.Execute(tripId, activId);
+        return NoContent();
+    }
+
 }
 

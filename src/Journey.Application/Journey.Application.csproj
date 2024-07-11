@@ -16,9 +16,4 @@
     <ProjectReference Include="..\Journey.Infrastructure\Journey.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Activities\Delete\" />
-    <Folder Include="UseCases\Activities\Complete\" />
-  </ItemGroup>
-
 </Project>
