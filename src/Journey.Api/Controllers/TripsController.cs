@@ -46,6 +46,14 @@ public class TripsController : ControllerBase
         return Ok(result);
     }
 
+    /// <summary>
+    /// Busca uma viagem por Id
+    /// </summary>
+    /// <param name="id">Id da Viagem</param>
+    /// <returns>IActionResult</returns>
+    /// <response code="200">Concluido</response>
+    /// <response code="404">Nao Encontrado</response>
+    /// <response code="500">Erro Interno</response>
     [HttpGet]
     [Route("{id}")]
     [ProducesResponseType(typeof(ResponseTripJson), StatusCodes.Status200OK)]
@@ -58,6 +66,13 @@ public class TripsController : ControllerBase
         return Ok(reponse);
     }
 
+    /// <summary>
+    /// Deleta uma viagem do banco de dados
+    /// </summary>
+    /// <param name="id">Id da Viagem</param>
+    /// <returns>IActionResult</returns>
+    /// <response code="204">Sem Conteudo</response>
+    /// <response code="404">Nao Encontrado</response>
     [HttpDelete]
     [Route("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -91,7 +106,6 @@ public class TripsController : ControllerBase
         return Created(string.Empty, response);
     }
 
-
     /// <summary>
     /// Completa uma atividade e Atualiza o seu Status
     /// </summary>
@@ -113,7 +127,6 @@ public class TripsController : ControllerBase
         return NoContent();
     }
 
-
     /// <summary>
     /// Deleta uma atividade
     /// </summary>
@@ -134,6 +147,5 @@ public class TripsController : ControllerBase
         useCase.Execute(tripId, activId);
         return NoContent();
     }
-
 }
 
